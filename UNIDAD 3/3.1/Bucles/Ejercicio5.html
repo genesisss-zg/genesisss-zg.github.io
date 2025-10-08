@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"/>
+<script>
+let fila;
+let columna = parseInt(prompt("Introduce el tamaño: ", "0"));
+
+// Parte superior del rombo
+for (fila = 1; fila <= columna; fila++) {
+    for (let espacios = columna - fila; espacios > 0; espacios--) {
+        document.write("&nbsp;&nbsp;");
+    }
+    for (let conta = 1; conta < (2 * fila); conta++) {
+        document.write("*");
+    }
+    document.writeln("<br>");
+}
+
+// Parte inferior del rombo
+for (fila = columna - 1; fila >= 1; fila--) {
+    for (let espacios = columna - fila; espacios > 0; espacios--) {
+        document.write("&nbsp;&nbsp;");
+    }
+    for (let conta = 1; conta < (2 * fila); conta++) {
+        document.write("*");
+    }
+    document.writeln("<br>");
+}
+</script>
+</head>
+</html>

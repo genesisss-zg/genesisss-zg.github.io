@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Acceso al portal web</title>
+  <script>
+    // Variables
+    let alumnoFP = false;
+    let edad = 0;
+    let respuesta;
+    let mensaje;
+
+    respuesta = window.prompt("¿Eres alumno de FP? (SI/NO):", "SI");
+    if (respuesta.toUpperCase() === "SI") {
+      alumnoFP = true;
+    }
+
+    edad = parseInt(window.prompt("Introduce tu edad:", "0"));
+
+    if (alumnoFP === true) {
+      if (edad > 18) {
+        mensaje = "Bienvenid@";
+      } else {
+        mensaje = "NO tienes acceso al portal web";
+      }
+    } else {
+      mensaje = "Acceso restringido: No eres alumno de FP";
+    }
+
+    document.write(`<h2>${mensaje}</h2>`);
+  </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 1</title>
+  <style>
+    @font-face {
+      font-family: 'Kalufira';
+      src: url('../../../fuentes/KalufiraRegular.woff') format('woff');
+      font-weight:lighter;
+      font-style: normal;
+      }
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-image: url(fondo-nombre.png);
+      height: 100vh;
+      width: 100vw;
+    }
+
+    #nombre {
+      position: absolute;
+      font-size: 5rem;
+      font-family: "Kalufira";
+      color: #00ff0d;
+      white-space: nowrap;
+      user-select: none;
+      cursor: grab;
+    }
+
+    #nombre:active {
+      cursor: grabbing;
+    }
+  </style>
+</head>
+<body>
+  <div id="nombre">Genesis</div>
+
+  <script>
+    const nombre = document.getElementById("nombre");
+
+    let x = 100;
+    let y = 100;
+    let dx = 2;
+    let dy = 2;
+    let dragging = false;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+    let velocidadX = 0;
+    let velocidadY = 0;
+
+    function mover() {
+      if (!dragging) {
+        const anchoVentana = window.innerWidth;
+        const altoVentana = window.innerHeight;
+        const anchoNombre = nombre.offsetWidth;
+        const altoNombre = nombre.offsetHeight;
+
+        x += dx;
+        y += dy;
+
+        if (x + anchoNombre >= anchoVentana || x <= 0) {
+          dx = -dx;
+        }
+        if (y + altoNombre >= altoVentana || y <= 0) {
+          dy = -dy;
+        }
+      }
+
+      nombre.style.left = x + "px";
+      nombre.style.top = y + "px";
+
+      requestAnimationFrame(mover);
+    }
+
+    // Cuando el mouse presiona sobre el nombre
+    nombre.addEventListener("mousedown", (e) => {
+      dragging = true;
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+      velocidadX = 0;
+      velocidadY = 0;
+    });
+
+    // Mientras arrastramos
+    document.addEventListener("mousemove", (e) => {
+      if (dragging) {
+        const dxMouse = e.clientX - lastMouseX;
+        const dyMouse = e.clientY - lastMouseY;
+
+        x += dxMouse;
+        y += dyMouse;
+
+        velocidadX = dxMouse;
+        velocidadY = dyMouse;
+
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+      }
+    });
+
+    // Al soltar el mouse → lanzar el nombre
+    document.addEventListener("mouseup", () => {
+      if (dragging) {
+        dragging = false;
+        dx = velocidadX;
+        dy = velocidadY;
+
+        // Evitar que quede con velocidad 0
+        if (dx === 0) dx = (Math.random() > 0.5 ? 2 : -2);
+        if (dy === 0) dy = (Math.random() > 0.5 ? 2 : -2);
+      }
+    });
+
+    mover();
+  </script>
+</body>
+</html>

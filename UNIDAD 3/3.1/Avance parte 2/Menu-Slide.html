@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Proyecto Menu-Slide con jQuery</title>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+/* ------------------ ESTILOS ------------------ */
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-width: 100%;
+}
+
+.slide-menu {
+    transform: translate3d(-250px, 0, 0);
+    position: absolute;
+    width: 250px;
+    background: #4f6b81;
+    color: #ddd;
+    left: 0;
+    transition: all .3s;
+    height: 100%;
+}
+
+.slide-menu h1 { 
+    height: 50px;
+    text-shadow: 1px 1px 1px #000;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu a {
+    display: block;
+    text-decoration: none; 
+    color: #fff;
+    font-size: 1em; 
+    padding: 15px;
+    background: linear-gradient(#0088CC,#006699); 
+    border-bottom: 1px solid #1e222b;
+    box-shadow: inset 0px 1px 1px #8b9db3;
+}
+
+.menu a:hover {
+    background: linear-gradient(#3b3f48, #3c434d); 
+    box-shadow: inset 0px 1px 1px #475059;
+}
+
+.encabezado {
+    width: 100%;
+    background-color: #006699; 
+    color: #E9FAFA;
+    height: 90px; 
+    display: block;
+    cursor: pointer;
+}
+
+.contenedor {
+    width: 100%; 
+    overflow: hidden;
+    min-height: 100%;
+    transform: translate3d(0, 0, 0); 
+    transition: transform .3s;
+    padding: 20px;
+}
+</style>
+
+<script>
+var toggle = 1;
+
+$(document).ready(function () {
+    $(".encabezado").click(function () {
+        if (toggle) {
+            $(".slide-menu").css("transform", "translate3d(0, 0, 0)");
+            $(".contenedor").css("transform", "translate3d(250px, 0, 0)");
+            toggle = 0;
+        } else {
+            $(".slide-menu").css("transform", "translate3d(-250px, 0, 0)");
+            $(".contenedor").css("transform", "translate3d(0, 0, 0)");
+            toggle = 1;
+        }
+    });
+});
+</script>
+
+</head>
+<body>
+
+<!-- MENÚ DESLIZANTE -->
+<div class="slide-menu">
+    <nav class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contacto</a></li>
+    </nav>
+</div>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div class="contenedor">
+    <div class="encabezado">
+        <h1>&equiv; Menu-Slide</h1>
+    </div>
+
+    <h2>Bienvenido a la web</h2>
+    <p>Haz click en la barra superior para abrir/cerrar el menú lateral.</p>
+    <p>Este ejemplo utiliza jQuery para mover el menú y el contenido suavemente.</p>
+</div>
+
+</body>
+</html>

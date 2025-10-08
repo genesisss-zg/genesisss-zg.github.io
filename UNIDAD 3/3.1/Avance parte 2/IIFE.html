@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Object Interface - IIFE</title>
+<script>
+let ficha = (function () {
+    // Variable privada
+    let alumno = "Marga";
+
+    return {
+        inicio() {
+            alumno = "Norat";
+        },
+        verNombre() {
+            return alumno;
+        }
+    };
+})();
+
+function programa() {
+    ficha.inicio();
+    document.writeln(`El nombre es: ${ficha.verNombre()} <br>`);
+}
+</script>
+</head>
+<body>
+<h3>Clase Ficha - Object Interface / IIFE</h3>
+<input type="button" value="Mostrar datos" onclick="programa()" />
+</body>
+</html>

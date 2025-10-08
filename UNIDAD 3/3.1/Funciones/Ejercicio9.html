@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head> <meta content="text/html; charset=utf-8">
+        <script>
+
+        function suma(n1,n2) { 
+          let resultado = n1 +n2;
+          document.getElementById("salida").innerHTML = `la suma de ${n1} + ${n2} es = ${resultado}`;
+        }
+        </script>
+    </head>
+
+    <body>
+        <h1>Función con dos parámetros</h1>
+        <p id="salida">Aquí el resultado</p>
+
+        <script>
+            let n1, n2;
+            n1 = Number(prompt("Introduce el primer numero"));
+            n2 = Number(prompt("Introduce el segundo numero"));
+            suma(n1, n2);
+        </script>
+
+    </body>
+</html>

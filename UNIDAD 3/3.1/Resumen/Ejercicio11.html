@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mayor de 3 números</title>
+    <script>
+        function encontrarMayor() {
+            let num1 = parseFloat(document.formu.num1.value);
+            let num2 = parseFloat(document.formu.num2.value);
+            let num3 = parseFloat(document.formu.num3.value);
+            let mayor;
+
+            if (num1 >= num2 && num1 >= num3) {
+                mayor = num1;
+            } else if (num2 >= num1 && num2 >= num3) {
+                mayor = num2;
+            } else {
+                mayor = num3;
+            }
+
+            document.getElementById("resultado").innerHTML = "El mayor es: " + mayor;
+        }
+    </script>
+</head>
+<body>
+    <h3>Encuentra el mayor de 3 números</h3>
+    <form name="formu">
+        Número 1: <input type="text" name="num1"><br><br>
+        Número 2: <input type="text" name="num2"><br><br>
+        Número 3: <input type="text" name="num3"><br><br>
+        <input type="button" value="Calcular" onclick="encontrarMayor()">
+    </form>
+
+    <p id="resultado"></p>
+</body>
+</html>

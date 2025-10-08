@@ -1,0 +1,27 @@
+<html>
+    <body>
+        <pre>
+            Inicio
+                // Declarar variable
+                num ← 0
+
+                // Solicitar número al usuario
+                Escribir "Introduce un número:"
+                Leer num
+
+                // Comprobar rangos y mostrar el tipo correspondiente
+                Si (num >= 1) Y (num <= 127) Entonces
+                    Escribir "Tipo A"
+                Sino si (num >= 128) Y (num <= 191) Entonces
+                    Escribir "Tipo B"
+                Sino si (num >= 192) Y (num <= 255) Entonces
+                    Escribir "Tipo C"
+                Sino
+                    Escribir "Número fuera de rango"
+                Fin Si
+
+            Fin
+
+        </pre>
+    </body>
+</html>

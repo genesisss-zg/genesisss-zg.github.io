@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Adivina el número</title>
+    <script>
+        let numeroSecreto;
+        let intentosMax = 10; // Número máximo de intentos
+        let intentosHechos = 0;
+
+        function iniciarJuego() {
+            numeroSecreto = Math.floor(Math.random() * 100) + 1; // 1 a 100
+            intentosHechos = 0;
+            document.getElementById("mensaje").innerHTML = "Juego iniciado! Tienes " + intentosMax + " intentos.";
+            document.getElementById("inputUsuario").value = "";
+            document.getElementById("inputUsuario").disabled = false;
+        }
+
+        function comprobarNumero() {
+            let numeroUsuario = parseInt(document.getElementById("inputUsuario").value);
+            intentosHechos++;
+
+            if (isNaN(numeroUsuario) || numeroUsuario < 1 || numeroUsuario > 100) {
+                alert("Introduce un número válido entre 1 y 100.");
+                return;
+            }
+
+            if (numeroUsuario === numeroSecreto) {
+                document.getElementById("mensaje").innerHTML = "¡Felicidades! Adivinaste el número en " + intentosHechos + " intentos.";
+                document.getElementById("inputUsuario").disabled = true;
+            } else if (numeroUsuario < numeroSecreto) {
+                document.getElementById("mensaje").innerHTML = "El número es mayor. Intentos: " + intentosHechos + "/" + intentosMax;
+            } else {
+                document.getElementById("mensaje").innerHTML = "El número es menor. Intentos: " + intentosHechos + "/" + intentosMax;
+            }
+
+            if (intentosHechos >= intentosMax && numeroUsuario !== numeroSecreto) {
+                document.getElementById("mensaje").innerHTML = "¡Se acabaron los intentos! El número era: " + numeroSecreto;
+                document.getElementById("inputUsuario").disabled = true;
+            }
+
+            document.getElementById("inputUsuario").value = "";
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Juego: Adivina el Número</h2>
+    <p>La computadora piensa un número entre 1 y 100. Tienes 10 intentos para adivinarlo.</p>
+
+    <button onclick="iniciarJuego()">Iniciar Juego</button><br><br>
+
+    <input type="text" id="inputUsuario" disabled placeholder="Introduce tu número">
+    <button onclick="comprobarNumero()">Comprobar</button>
+
+    <p id="mensaje"></p>
+</body>
+</html>

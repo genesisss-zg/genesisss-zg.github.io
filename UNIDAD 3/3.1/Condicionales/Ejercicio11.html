@@ -1,0 +1,35 @@
+<html>
+    <body>
+        <pre>
+            Inicio
+                // Variables
+                origen ← ""
+                destino ← ""
+                descuento ← 0
+
+                Escribir "Introduce ciudad de origen:"
+                Leer origen
+
+                Escribir "Introduce ciudad de destino:"
+                Leer destino
+
+                Si (origen = "Palma") Entonces
+                    Si (destino = "Barcelona") Entonces
+                        descuento ← 5
+                    Sino Si (destino = "Madrid") Entonces
+                        descuento ← 10
+                    Sino Si (destino = "Valencia") Entonces
+                        descuento ← 15
+                    Sino
+                        descuento ← 0
+                    Fin Si
+                Sino
+                    descuento ← 0
+                Fin Si
+
+                Escribir "El descuento aplicado es del ", descuento, "%"
+            Fin
+
+        </pre>
+    </body>
+</html>

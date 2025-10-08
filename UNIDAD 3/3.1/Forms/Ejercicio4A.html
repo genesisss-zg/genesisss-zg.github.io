@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forms 4 - Una función</title>
+    <script>
+        function calcularPotencias() {
+
+            let numero = document.fdatos.entrada.value;
+            numero = parseFloat(numero);
+
+            // calcular cuadrado y cubo
+            let cuadrado = numero ** 2;
+            let cubo = numero ** 3;
+
+            // mostrar resultado
+            document.writeln(`Número: ${numero}<br>`);
+            document.writeln(`Al cuadrado: ${cuadrado}<br>`);
+            document.writeln(`Al cubo: ${cubo}`);
+        }
+    </script>
+</head>
+<body>
+    <form name="fdatos">
+        Introduce un número: 
+        <input type="text" name="entrada"/>
+        <input type="button" value="Calcular" onclick="calcularPotencias()" />
+    </form>
+</body>
+</html>

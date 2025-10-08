@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de multiplicar dinámica</title>
+    <script>
+        // Función que genera la tabla de multiplicar
+        const generarTabla = (num, hasta) => {
+            let tablaHTML = "<table border='1' cellpadding='5'>";
+
+            for (let i = 1; i <= hasta; i++) {
+                tablaHTML += `<tr>
+                                <td>${num} x ${i}</td>
+                                <td>=</td>
+                                <td>${num * i}</td>
+                              </tr>`;
+            }
+
+            tablaHTML += "</table>";
+            return tablaHTML;
+        }
+
+        // Función principal que pide los números y muestra la tabla
+        const mostrarTabla = () => {
+            let num = parseInt(prompt("Introduce el primer número (1-10):"));
+            let hasta = parseInt(prompt("Introduce el segundo número (1-10):"));
+
+            // Validar que estén entre 1 y 10
+            if (num < 1 || num > 10 || hasta < 1 || hasta > 10) {
+                alert("Los números deben estar entre 1 y 10");
+                return;
+            }
+
+            // Generar la tabla y mostrarla en la página
+            document.getElementById("resultado").innerHTML = generarTabla(num, hasta);
+        }
+    </script>
+</head>
+
+<body>
+    <h3>Tabla de multiplicar</h3>
+    <button onclick="mostrarTabla()">Generar tabla</button>
+    <div id="resultado" style="margin-top:20px;"></div>
+</body>
+</html>

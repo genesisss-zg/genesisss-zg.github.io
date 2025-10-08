@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversión ºC a ºF</title>
+    <script>
+        function convertir() {
+
+            let celsius = document.fdatos.entrada.value;
+
+            celsius = parseFloat(celsius);
+
+            let fahrenheit = (celsius * 9/5) + 32;
+
+            document.writeln(`${celsius} ºC equivalen a ${fahrenheit} ºF`);
+        }
+    </script>
+</head>
+
+<body>
+    <h3>Conversión de Celsius a Fahrenheit</h3>
+    <form name="fdatos">
+        Introduce ºC: 
+        <input type="text" name="entrada"/>
+        <input type="button" value="Convertir" onclick="convertir()" />
+    </form>
+</body>
+</html>

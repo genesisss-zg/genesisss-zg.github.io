@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>CommonJS - Función Constructora</title>
+<script>
+function Ficha() { 
+    // Datos privados
+    let alumno = {
+        nombre: "Caterina",
+        edad: 18
+    };
+
+    // Métodos públicos
+    this.verNombre = function() {
+        return alumno.nombre;
+    }
+
+    this.verEdad = function() {
+        return alumno.edad;
+    }
+}
+
+function programa() {
+    let obj = new Ficha();
+    document.writeln(`El nombre es: ${obj.verNombre()} <br>`);
+    document.writeln(`La edad es: ${obj.verEdad()} <br>`);
+}
+</script>
+</head>
+<body>
+<h3>Clase Ficha - CommonJS</h3>
+<input type="button" value="Mostrar datos" onclick="programa()" />
+</body>
+</html>

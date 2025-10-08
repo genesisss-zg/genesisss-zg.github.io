@@ -1,0 +1,78 @@
+<!--
+un menú para ver:
+números pares entre el 0 y 100 
+números impares entre el 0 y 100
+números del 0 al 100
+de 100 a  0
+múltiplos de 2 entre 0 y 100
+múltiplos de 3 entre 0 y 100
+mostrar pares e impares entre 0 y 100 y que cuente cuantos son impares y cuantos son pares
+salir del programa...
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Menú de Números</title>
+    </head>
+    <body>
+    <h2 align = "center" >Menú de Números</h2>
+    <div align = "center" >
+    <button onclick="mostrarNumeros(1)">1. Pares entre 0 y 100</button>
+    <button onclick="mostrarNumeros(2)">2. Impares entre 0 y 100</button>
+    <button onclick="mostrarNumeros(3)">3. Números del 0 al 100</button>
+    <button onclick="mostrarNumeros(4)">4. Números del 100 al 0</button>
+    <button onclick="mostrarNumeros(5)">5. Múltiplos de 2 entre 0 y 100</button>
+    <button onclick="mostrarNumeros(6)">6. Múltiplos de 3 entre 0 y 100</button>
+    <button onclick="mostrarNumeros(7)">7. Pares e impares contados</button>
+    <button onclick="window.close();">8. Salir del programa</button>
+    </div>
+    <hr>
+    <pre id="resultado"></pre>
+
+        <script>
+        function mostrarNumeros(opc) {
+            let salida = "";
+            switch(opc) {
+                case 1:
+                    salida = "Pares entre 0 y 100:\n" + operacion(0,100,n=>n%2===0).join(", ");
+                    break;
+                case 2:
+                    salida = "Impares entre 0 y 100:\n" + operacion(0,100,n=>n%2!==0).join(", ");
+                    break;
+                case 3:
+                    salida = "Números del 0 al 100:\n" + operacion(0,100,()=>true).join(", ");
+                    break;
+                case 4:
+                    salida = "Números del 100 al 0:\n" + operacion(100,0,()=>true,true).join(", ");
+                    break;
+                case 5:
+                    salida = "Múltiplos de 2 entre 0 y 100:\n" + operacion(0,100,n=>n%2===0).join(", ");
+                    break;
+                case 6:
+                    salida = "Múltiplos de 3 entre 0 y 100:\n" + operacion(0,100,n=>n%3===0).join(", ");
+                    break;
+                case 7:
+                    let pares = operacion(0,100,n=>n%2===0);
+                    let impares = operacion(0,100,n=>n%2!==0);
+                    salida = "Pares:\n" + pares.join(", ") + "\nCantidad: " + pares.length +
+                            "\n\nImpares:\n" + impares.join(", ") + "\nCantidad: " + impares.length;
+                    break;
+            }
+            document.getElementById("resultado").textContent = salida;
+        }
+        function operacion(inicio, fin, condicion, suma=false) {
+            let numeros = [];
+            if (!suma) {
+                for (let i = inicio; i <= fin; i++) {
+                    if (condicion(i)) numeros.push(i);
+                }
+            } else {
+                for (let i = inicio; i >= fin; i--) {
+                    if (condicion(i)) numeros.push(i);
+                }
+            }
+            return numeros;
+        }
+        </script>
+    </body>
+</html>

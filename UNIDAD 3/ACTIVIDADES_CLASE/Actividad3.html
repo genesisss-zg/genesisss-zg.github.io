@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Calificaciones</title>
+</head>
+<body>
+    <h1 align="center">Registro de Calificaciones (1 al 10)</h1>
+
+    <div align="center" id="formulario-inicial">
+        <label for="numCalificaciones">Cuántos alumnos vas a promediar? </label>
+        <input type="number" id="numCalificaciones" min="1">
+        <button onclick="iniciarRegistro()">Iniciar</button>
+    </div>
+
+    <div align="center" id="formulario-calificacion" style="display:none;">
+        <label for="nombre">Nombre: </label>
+        <input type="text" id="nombre">
+        <label for="calificacion">Calificación (1-10): </label>
+        <input type="number" id="calificacion" min="1" max="10">
+        <button onclick="agregarCalificacion()">Agregar</button>
+        <p id="contador"></p>
+    </div>
+
+    <div align="center" id="resultado" style="display:none;">
+        <h3>Resultados</h3>
+        <table id="tablaResultados" border="1" cellspacing="0" cellpadding="6">
+            <thead>
+                <tr bgcolor="#d3d3d3">
+                    <th>Nombre</th>
+                    <th>Calificación</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <p id="resumen"></p>
+    </div>
+
+    <script>
+        let numCalificaciones = 0;
+        let contadorActual = 0;
+        let listaCalificaciones = [];
+
+        function iniciarRegistro() {
+            numCalificaciones = parseInt(document.getElementById('numCalificaciones').value);
+            if (numCalificaciones > 0) {
+                document.getElementById('formulario-inicial').style.display = 'none';
+                document.getElementById('formulario-calificacion').style.display = 'block';
+                actualizarContador();
+            } else {
+                alert('Ingrese un número válido de alumnos.');
+            }
+        }
+
+        function actualizarContador() {
+            document.getElementById('contador').innerText = `Calificaciones ingresadas: ${contadorActual} / ${numCalificaciones}`;
+        }
+
+        function agregarCalificacion() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const calificacion = parseFloat(document.getElementById('calificacion').value);
+
+            if (nombre === '' || isNaN(calificacion) || calificacion < 1 || calificacion > 10) {
+                alert('Ingrese un nombre válido y una calificación entre 1 y 10.');
+                return;
+            }
+
+            listaCalificaciones.push({ nombre, calificacion });
+            contadorActual++;
+
+            document.getElementById('nombre').value = '';
+            document.getElementById('calificacion').value = '';
+            actualizarContador();
+
+            if (contadorActual === numCalificaciones) {
+                mostrarResultados();
+            }
+        }
+
+        function mostrarResultados() {
+            document.getElementById('formulario-calificacion').style.display = 'none';
+            document.getElementById('resultado').style.display = 'block';
+
+            const tbody = document.querySelector('#tablaResultados tbody');
+            tbody.innerHTML = '';
+
+            let suma = 0;
+            let maxCal = listaCalificaciones[0].calificacion;
+            let minCal = listaCalificaciones[0].calificacion;
+            let alumnoMax = listaCalificaciones[0].nombre;
+            let alumnoMin = listaCalificaciones[0].nombre;
+
+            listaCalificaciones.forEach(alumno => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `<td>${alumno.nombre}</td><td align="center">${alumno.calificacion}</td>`;
+                tbody.appendChild(fila);
+
+                suma += alumno.calificacion;
+                if (alumno.calificacion > maxCal) {
+                    maxCal = alumno.calificacion;
+                    alumnoMax = alumno.nombre;
+                }
+                if (alumno.calificacion < minCal) {
+                    minCal = alumno.calificacion;
+                    alumnoMin = alumno.nombre;
+                }
+            });
+
+            const promedio = (suma / listaCalificaciones.length).toFixed(2);
+
+            document.getElementById('resumen').innerHTML = `
+                <br><b>Calificación más alta:</b> ${maxCal} : ${alumnoMax} <br>
+                <b>Calificación más baja:</b> ${minCal}  ${alumnoMin} <br>
+                <b>Promedio general:</b> ${promedio}
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>Datos INE</title>
+</head>
+<body bgcolor="#E6E6FA">
+    <h2 align="center">Datos INE</h2>
+    <table border="0" align="center" cellpadding="10">
+        <tr>
+            <td align="center">
+                <img src="../../../sitio/imagenes/foto.jpg" alt="Foto INE" width="150" height="200" border="2">
+            </td>
+
+            <td>
+                <div id="resultado"></div>
+            </td>
+        </tr>
+    </table>
+    <script>
+        function getParametro(nombre) {
+            let params = new URLSearchParams(window.location.search);
+            return params.get(nombre);
+        }
+        let datos = `
+            <p><b>Nombre:</b> ${getParametro("nombre")}</p>
+            <p><b>Apellido Paterno:</b> ${getParametro("apellido_paterno")}</p>
+            <p><b>Apellido Materno:</b> ${getParametro("apellido_materno")}</p>
+            <p><b>CURP:</b> ${getParametro("curp")}</p>
+            <p><b>Clave de Elector:</b> ${getParametro("clave")}</p>
+            <p><b>Domicilio:</b> ${getParametro("domicilio")}</p>
+            <p><b>Sexo:</b> ${getParametro("sexo")}</p>
+        `;
+
+        // Insertar los datos en el div
+        document.getElementById("resultado").innerHTML = datos;
+    </script>
+</body>
+</html>

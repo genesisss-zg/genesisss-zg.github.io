@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de Dados</title>
+    <script type="text/javascript"> 
+        // Función para iniciar el juego
+        function inic(){
+            document.game.dinero.value = 50; // dinero inicial
+            document.game.res.value = "";
+            document.game.dado.value = "";
+        }
+
+        // Función para calcular resultado del dado
+        function calc(){
+            let Din = parseInt(document.game.dinero.value); 
+            let Num = parseInt(document.game.num.value);
+            let Apu = parseInt(document.game.apuesta.value); 
+
+            // Validar entradas
+            if (isNaN(Num) || Num < 1 || Num > 6) {
+                alert("Introduce un número válido del 1 al 6.");
+                return;
+            }
+            if (isNaN(Apu) || Apu <= 0 || Apu > Din) {
+                alert("Introduce una apuesta válida, no mayor que tu dinero disponible.");
+                return;
+            }
+
+            // Lanzar dado (1-6)
+            let dado = Math.floor(Math.random() * 6) + 1;
+            document.game.dado.value = dado;
+
+            // Comprobar si acierta
+            if (Num === dado){
+                Din += Apu * 2; // gana el doble de lo apostado
+                document.game.res.value = "¡Has ganado! +" + (Apu*2) + "€";
+            } else {
+                Din -= Apu; // pierde la apuesta
+                document.game.res.value = "Has perdido! -" + Apu + "€";
+            }
+
+            document.game.dinero.value = Din;
+
+            // Comprobar fin del juego
+            if (Din <= 0){
+                alert("¡Te has quedado sin dinero! Fin del juego.");
+            } else if (Din >= 200){
+                alert("¡Felicidades! Alcanzaste 200€. Has ganado el juego.");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1 align="center">JUEGO DE DADOS</h1>
+    <form name="game">
+        <div align="center">
+            Dinero: <input type="text" name="dinero" size="5" readonly>
+            &nbsp;&nbsp; Dado: <input type="text" name="dado" size="5" readonly>
+            <br><br>
+            Introduzca un número del 1 al 6: <input type="text" name="num" size="5">
+            <br><br>
+            Introduzca su apuesta: <input type="text" name="apuesta" size="5">
+            <br><br>
+            <input type="button" name="Start" value="Start" onClick="inic()">
+            <input type="button" name="play" value="Jugar" onClick="calc()">
+            <br><br>
+            Resultado: <input type="text" name="res" size="25" readonly>
+        </div>
+    </form>
+</body>
+</html>

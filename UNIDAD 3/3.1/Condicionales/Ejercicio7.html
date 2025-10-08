@@ -1,0 +1,31 @@
+<html>
+    <body>
+        <pre>
+            Inicio
+                // Variables
+                alumnoFP ← FALSO
+                edad ← 0
+
+                Escribir "¿Eres alumno de FP? (SI/NO): "
+                Leer respuesta
+
+                Si (respuesta = "SI") Entonces
+                    alumnoFP ← VERDADERO
+                Fin Si
+
+                Escribir "Introduce tu edad: "
+                Leer edad
+
+                Si (alumnoFP = VERDADERO) Entonces
+                    Si (edad > 18) Entonces
+                        Escribir "Bienvenid@"
+                    Sino
+                        Escribir "NO tienes acceso al portal web"
+                    Fin Si
+                Sino
+                    Escribir "Acceso restringido: No eres alumno de FP"
+                Fin Si
+            Fin
+        </pre>
+    </body>
+</html>

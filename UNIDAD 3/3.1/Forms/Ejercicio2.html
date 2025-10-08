@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calcular 10%</title>
+    <script>
+        function calcularPorcentaje() {
+            // Obtiene el valor del input
+            let numero = document.fdatos.entrada.value;
+           
+            // Calcula el 10%
+            let resultado = numero * 0.10;
+
+            // Muestra el resultado
+            document.writeln(`El 10% de ${numero} es: ${resultado}`);
+        }
+    </script>
+</head>
+
+<body>
+    <form name="fdatos">
+        Introduce un número: 
+        <input type="number" name="entrada"/>
+        <input type="button" value="Calcular 10%" onclick="calcularPorcentaje()" />
+    </form>
+</body>
+</html>

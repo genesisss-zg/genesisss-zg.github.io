@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head> <meta content="text/html; charset=utf-8">
+        <script>
+
+        function Saludo(persona1,persona2) { document.getElementById("salida").innerHTML = `Holaaaa ${persona1} y ${persona2}`;
+        }
+        </script>
+    </head>
+
+    <body>
+        <h1>Función con dos parámetros</h1>
+        <p>Saluda a dos personas.</p></br>
+        <p id="salida">Aquí el resultado</p>
+
+        <script>
+            let p1, p2;
+            p1 = prompt("Introduce el primer nombre");
+            p2 = prompt("Introduce el primer nombre");
+            Saludo(p1,p2);
+        </script>
+
+    </body>
+</html>

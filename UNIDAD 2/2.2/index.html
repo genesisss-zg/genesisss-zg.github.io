@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividades Programación web</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    /* Variables de color - Tema oscuro */
+    :root {
+      --verde-neon: #5AF709;
+      --fondo-oscuro: #000000;
+      --texto-claro: #FFF6EB;
+      --verde-oscuro: #1a3e1a;
+      --verde-suave: #0d1f0d;
+    }
+
+    /* Fuente personalizada */
+    @font-face {
+      font-family: 'Kalufira';
+      src: url('../../fuentes/KalufiraRegular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Consolaa';
+      src: url('../../fuentes/ConsolaMono-Book.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* Fondo y tipografía global */
+    body {
+      background-image: url(fondito.png);
+      color: var(--texto-claro);
+      font-family: "Poppins", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    /*  Navbar */
+    .navbar {
+      background: linear-gradient(135deg, var(--verde-oscuro), var(--fondo-oscuro));
+      box-shadow: 0 4px 12px rgba(90, 247, 9, 0.2);
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--verde-neon);
+    }
+
+    .navbar-brand {
+      font-family: "Consolaa", sans-serif;
+      font-size: 2rem;
+      color: var(--verde-neon) !important;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-link {
+      color: var(--texto-claro) !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      border-radius: 4px;
+      margin: 0 2px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--verde-neon) !important;
+      background-color: rgba(90, 247, 9, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Dropdown */
+    .dropdown-menu {
+      background: linear-gradient(to bottom, var(--fondo-oscuro), var(--verde-oscuro));
+      border: 1px solid var(--verde-neon);
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(90, 247, 9, 0.2);
+      padding: 0.4rem;
+      min-width: 200px;
+    }
+
+    .dropdown-item {
+      color: var(--texto-claro);
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .dropdown-item i {
+      width: 18px;
+      text-align: center;
+      color: var(--verde-neon);
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+      background-color: var(--verde-neon);
+      color: var(--fondo-oscuro);
+      transform: translateX(5px);
+    }
+
+    .dropdown-item:hover i {
+      color: var(--fondo-oscuro);
+    }
+
+    /* Submenús */
+    .dropdown-submenu {
+      position: relative;
+    }
+
+    .dropdown-submenu > .dropdown-toggle::after {
+      content: "\f105";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      border: none;
+      margin-left: auto;
+      color: var(--verde-neon);
+    }
+
+    .dropdown-submenu .dropdown-menu {
+      top: 0;
+      left: 100%;
+      margin-top: -0.5rem;
+      margin-left: 0.1rem;
+      display: none;
+    }
+
+    .dropdown-submenu:hover > .dropdown-menu {
+      display: block;
+    }
+
+    /*  Contenido principal */
+    .container-main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .content {
+      background: linear-gradient(135deg, var(--verde-suave), var(--fondo-oscuro));
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 5px 15px rgba(90, 247, 9, 0.1);
+      border: 1px solid var(--verde-neon);
+      min-height: 70vh;
+    }
+
+    .welcome-section h1 {
+      font-family: "Consolaa";
+      color: var(--verde-neon);
+      margin-bottom: 1rem;
+    }
+
+    .welcome-section p {
+      color: var(--texto-claro);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* Tarjetas */
+    .card {
+      border: 1px solid var(--verde-neon);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(90, 247, 9, 0.1);
+      transition: transform 0.3s ease;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      background-color: var(--verde-suave);
+      color: var(--texto-claro);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(90, 247, 9, 0.2);
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, var(--verde-oscuro), var(--fondo-oscuro));
+      color: var(--verde-neon);
+      font-weight: 600;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--verde-neon);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      background-color: var(--verde-suave);
+    }
+
+    /* Botones */
+    .btn-verde {
+      background: linear-gradient(135deg, var(--verde-neon), #4ad408);
+      color: var(--fondo-oscuro);
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-verde:hover {
+      background: linear-gradient(135deg, #4ad408, var(--verde-neon));
+      color: var(--fondo-oscuro);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(90, 247, 9, 0.3);
+    }
+
+    .btn-outline-verde {
+      border: 1px solid var(--verde-neon);
+      color: var(--verde-neon);
+      background: transparent;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-verde:hover {
+      background: var(--verde-neon);
+      color: var(--fondo-oscuro);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--verde-oscuro), var(--fondo-oscuro));
+      color: var(--texto-claro);
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: 3rem;
+      border-top: 1px solid var(--verde-neon);
+    }
+
+    /* Estilos para PDF embebido */
+    .iframe-pdf {
+      width: 100%;
+      height: 80vh;
+      border: 1px solid var(--verde-neon);
+      border-radius: 8px;
+      background-color: white;
+    }
+
+    /* ESTILOS PARA TABLA DEL TEMARIO - TRANSPARENTE */
+    .table-temario {
+      background-color: transparent !important;
+      border: 1px solid var(--verde-neon);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 1rem;
+      width: 100%;
+    }
+    
+    .table-temario thead {
+      background: linear-gradient(135deg, rgba(26, 62, 26, 0.8), rgba(13, 31, 13, 0.8)) !important;
+      border-bottom: 2px solid var(--verde-neon);
+    }
+    
+    .table-temario th {
+      color: var(--verde-neon) !important;
+      font-weight: 600;
+      padding: 1rem;
+      text-align: left;
+      font-size: 1.1rem;
+      background-color: transparent !important;
+      border: none !important;
+    }
+    
+    .table-temario td {
+      color: var(--texto-claro) !important;
+      padding: 1rem;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(90, 247, 9, 0.2) !important;
+      background-color: transparent !important;
+      border: none !important;
+    }
+    
+    .table-temario tr:last-child td {
+      border-bottom: none !important;
+    }
+    
+    .table-temario td strong {
+      color: var(--verde-neon);
+    }
+    
+    .temario-section h3 {
+      color: var(--verde-neon);
+      border-bottom: 2px solid var(--verde-neon);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Anular estilos por defecto de Bootstrap para tablas */
+    .table {
+      --bs-table-bg: transparent !important;
+      --bs-table-color: var(--texto-claro) !important;
+      --bs-table-border-color: rgba(90, 247, 9, 0.2) !important;
+    }
+
+    .table > :not(caption) > * > * {
+      background-color: transparent !important;
+    }
+
+    /* Efectos de brillo para elementos interactivos */
+    .nav-link, .dropdown-item, .btn-verde, .btn-outline-verde {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before, .dropdown-item::before, .btn-verde::before, .btn-outline-verde::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(90, 247, 9, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .nav-link:hover::before, .dropdown-item:hover::before, .btn-verde:hover::before, .btn-outline-verde:hover::before {
+      left: 100%;
+    }
+
+    /* MEDIA QUERIES - Responsive */
+    @media (max-width: 991.98px) {
+      .dropdown-submenu .dropdown-menu {
+        position: static;
+        margin-left: 1rem;
+        border-left: 2px solid var(--verde-neon);
+      }
+      
+      .dropdown-submenu > .dropdown-toggle::after {
+        content: "\f107";
+      }
+    }
+
+    @media (max-width: 768px) {
+      .iframe-pdf {
+        height: 60vh;
+      }
+      
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+      
+      .table-temario {
+        font-size: 0.9rem;
+      }
+      
+      .table-temario th,
+      .table-temario td {
+        padding: 0.75rem 0.5rem;
+      }
+      
+      .content {
+        padding: 1.5rem;
+      }
+      
+      .welcome-section h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .navbar-brand {
+        font-size: 1.3rem;
+      }
+      
+      .nav-link {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.9rem;
+      }
+      
+      .content {
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      
+      .table-temario th,
+      .table-temario td {
+        padding: 0.5rem 0.3rem;
+        font-size: 0.85rem;
+      }
+      
+      /* Para tablas en móviles muy pequeños */
+      .table-responsive {
+        border: 1px solid var(--verde-neon);
+        border-radius: 8px;
+      }
+    }
+</style>
+</head>
+<body>
+  <!-- Barra de navegación -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-code"></i> Mis Ejercicios
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+
+          <!-- Unidad 1 -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="unidad1" role="button" data-bs-toggle="dropdown">
+              Unidad 1
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="unidad1">
+              <!-- PDF -->
+              <li><a class="dropdown-item load-pdf" href="#" data-src="../../UNIDAD 1/1.1_LineaDelTiempo_Evolución de las Aplicaciones Web.pdf">
+                <i class="fas fa-file-pdf"></i> Actividad 1.1
+              </a></li>
+              <li><a class="dropdown-item load-pdf" href="#"  data-src= "../../UNIDAD 1/1.2_Reporte_TesteandoEditoresdeCodigo.pdf">
+                <i class="fas fa-file-pdf"></i> Actividad 1.2
+              </a></li>
+            </ul>
+          </li>
+
+      <!-- Unidad 2 -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="unidad2" role="button" data-bs-toggle="dropdown">
+          </i> Unidad 2
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="unidad2">
+
+          <!-- Submenú Actividad 2.1 -->
+          <li class="dropdown-submenu">
+            <a class="dropdown-item dropdown-toggle" href="#">
+              <i class="fas fa-code"></i> Actividad 2.1 Uso de Lenguaje HTML
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../../sitio/ejemplo01.html" target="_blank">
+                <i class="fas fa-file-code"></i> Ejercicio 1
+              </a></li>
+              <li><a class="dropdown-item" href="../../sitio/ejemplo02.html" target="_blank">
+                <i class="fas fa-file-code"></i> Ejercicio 2
+              </a></li>
+              <li><a class="dropdown-item" href="../../sitio/ejemplo03.html" target="_blank">
+                <i class="fas fa-file-code"></i> Ejercicio 3
+              </a></li>
+              <li><a class="dropdown-item" href="../../sitio/ejemplo04.html" target="_blank">
+                <i class="fas fa-file-code"></i> Ejercicio 4
+              </a></li>
+              <li><a class="dropdown-item" href="../../sitio/ejemplo05Frame.html" target="_blank">
+                <i class="fas fa-file-code"></i> Ejercicio 5
+              </a></li>
+              <li><a class="dropdown-item" href="../../sitio/ejemplo06.html" target="_blank">
+                <i class="fas fa-file-code"></i> Ejercicio 6
+              </a></li>
+            </ul>
+          </li>
+
+          <li><a class="dropdown-item" href="nav.html" target="_blank">
+            <i class="fas fa-bars"></i> Actividad 2.2 Creación de Menús
+          </a></li>
+
+          <!-- Submenú Actividades en Clase -->
+          <li class="dropdown-submenu">
+            <a class="dropdown-item dropdown-toggle" href="#">
+              <i class="fas fa-chalkboard-teacher"></i> Actividades en Clase
+            </a>
+            <ul class="dropdown-menu">
+
+              <!-- Submenú Actividad 1 -->
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">
+                  <i class="fas fa-pencil-alt"></i> Actividad 1
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="../ACTIVIDADES EN CLASE/A1/ejercicios/ejercicio1.html" target="_blank">
+                    <i class="fas fa-code"></i> Ejercicio 1
+                  </a></li>
+                  <li><a class="dropdown-item" href="../ACTIVIDADES EN CLASE/A1/ejercicios/ejercicio2.html" target="_blank">
+                    <i class="fas fa-code"></i> Ejercicio 2
+                  </a></li>
+                  <li><a class="dropdown-item" href="../ACTIVIDADES EN CLASE/A1/ejercicios/ejercicio3.html" target="_blank">
+                    <i class="fas fa-code"></i> Ejercicio 3
+                  </a></li>
+                  <li><a class="dropdown-item" href="../ACTIVIDADES EN CLASE/A1/ejercicios/ejercicio4.html" target="_blank">
+                    <i class="fas fa-code"></i> Ejercicio 4
+                  </a></li>
+                  <li><a class="dropdown-item" href="../ACTIVIDADES EN CLASE/A1/ejercicios/ejercicio5.html" target="_blank">
+                    <i class="fas fa-code"></i> Ejercicio 5
+                  </a></li>
+                  <li><a class="dropdown-item" href="../ACTIVIDADES EN CLASE/A1/ejercicios/ejercicio6.html" target="_blank">
+                    <i class="fas fa-code"></i> Ejercicio 6
+                  </a></li>
+                  <li><a class="dropdown-item" href="../ACTIVIDADES EN CLASE/A1/ejercicios/ejercicio7.html" target="_blank">
+                    <i class="fas fa-code"></i> Ejercicio 7
+                  </a></li>
+                  <li><a class="dropdown-item" href="../ACTIVIDADES EN CLASE/A1/ejercicios/ejercicio8.html" target="_blank">
+                    <i class="fas fa-code"></i> Ejercicio 8
+                  </a></li>
+                </ul>
+              </li>
+
+              <li><a class="dropdown-item" href="../ACTIVIDADES EN CLASE/A2/nombre.html" target="_blank">
+                <i class="fas fa-pencil-alt"></i> Actividad 2
+              </a></li>
+              <li><a class="dropdown-item" href="../ACTIVIDADES EN CLASE/A3/formulario.html" target="_blank">
+                <i class="fas fa-pencil-alt"></i> Actividad 3
+              </a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </li>
+
+          <!-- Unidad 3 -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="unidad3" role="button" data-bs-toggle="dropdown">
+               Unidad 3
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="unidad3">
+              <!-- Actividad 3.1 -->
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">
+                  <i class="fas fa-code"></i> Actividad 3.1
+                </a>
+                <ul class="dropdown-menu">
+
+                  <!-- Iniciación -->
+                  <li class="dropdown-submenu">
+                    <a class="dropdown-item dropdown-toggle" href="#">Iniciación</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio1.html" target="_blank">Ejercicio 1</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio2.html" target="_blank">Ejercicio 2</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio3.html" target="_blank">Ejercicio 3</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio4.html" target="_blank">Ejercicio 4</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio5.html" target="_blank">Ejercicio 5</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio6.html" target="_blank">Ejercicio 6</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio7.html" target="_blank">Ejercicio 7</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio8.html" target="_blank">Ejercicio 8</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio9.html" target="_blank">Ejercicio 9</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio10.html" target="_blank">Ejercicio 10</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio11.html" target="_blank">Ejercicio 11</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio12.html" target="_blank">Ejercicio 12</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio13.html" target="_blank">Ejercicio 13</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Iniciación/Ejercicio14.html" target="_blank">Ejercicio 14</a></li>
+                    </ul>
+                  </li>
+
+                  <!-- Condicionales -->
+                  <li class="dropdown-submenu">
+                    <a class="dropdown-item dropdown-toggle" href="#">Condicionales</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio1.html" target="_blank">Ejercicio 1</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio2.html" target="_blank">Ejercicio 2</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio3.html" target="_blank">Ejercicio 3</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio4.html" target="_blank">Ejercicio 4</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio5.html" target="_blank">Ejercicio 5</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio6.html" target="_blank">Ejercicio 6</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio7.html" target="_blank">Ejercicio 7</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio8.html" target="_blank">Ejercicio 8</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio9.html" target="_blank">Ejercicio 9</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio10.html" target="_blank">Ejercicio 10</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio11.html" target="_blank">Ejercicio 11</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio12.html" target="_blank">Ejercicio 12</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio13.html" target="_blank">Ejercicio 13</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio14.html" target="_blank">Ejercicio 14</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio15.html" target="_blank">Ejercicio 15</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Condicionales/Ejercicio16.html" target="_blank">Ejercicio 16</a></li>
+                    </ul>
+                  </li>
+
+                  <!-- Funciones -->
+                  <li class="dropdown-submenu">
+                    <a class="dropdown-item dropdown-toggle" href="#">Funciones</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio1.html" target="_blank">Ejercicio 1</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio2.html" target="_blank">Ejercicio 2</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio3.html" target="_blank">Ejercicio 3</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio4.html" target="_blank">Ejercicio 4</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio5.html" target="_blank">Ejercicio 5</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio6.html" target="_blank">Ejercicio 6</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio7.html" target="_blank">Ejercicio 7</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio8.html" target="_blank">Ejercicio 8</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio9.html" target="_blank">Ejercicio 9</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio10.html" target="_blank">Ejercicio 10</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio11.html" target="_blank">Ejercicio 11</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Funciones/Ejercicio12.html" target="_blank">Ejercicio 12</a></li>
+                    </ul>
+                  </li>
+
+                  <!-- Formularios -->
+                  <li class="dropdown-submenu">
+                    <a class="dropdown-item dropdown-toggle" href="#">Formularios</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio1.html" target="_blank">Ejercicio 1</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio2.html" target="_blank">Ejercicio 2</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio3.html" target="_blank">Ejercicio 3</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio4A.html" target="_blank">Ejercicio 4 (a)</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio4B.html" target="_blank">Ejercicio 4 (b)</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio5.html" target="_blank">Ejercicio 5</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio6.html" target="_blank">Ejercicio 6</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio7.html" target="_blank">Ejercicio 7</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio8.html" target="_blank">Ejercicio 8</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio9.html" target="_blank">Ejercicio 9</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio10.html" target="_blank">Ejercicio 10</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio11.html" target="_blank">Ejercicio 11</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio12.html" target="_blank">Ejercicio 12</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Forms/Ejercicio13.html" target="_blank">Ejercicio 13</a></li>
+                    </ul>
+                  </li>
+
+                  <!-- Bucles For -->
+                  <li class="dropdown-submenu">
+                    <a class="dropdown-item dropdown-toggle" href="#">Bucles For</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Bucles/Ejercicio1.html" target="_blank">Ejercicio 1</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Bucles/Ejercicio2.html" target="_blank">Ejercicio 2</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Bucles/Ejercicio3.html" target="_blank">Ejercicio 3</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Bucles/Ejercicio4.html" target="_blank">Ejercicio 4</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Bucles/Ejercicio5.html" target="_blank">Ejercicio 5</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Bucles/Ejercicio6.html" target="_blank">Ejercicio 6</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Bucles/Ejercicio7.html" target="_blank">Ejercicio 7</a></li>
+                    </ul>
+                  </li>
+
+                  <!-- Resumen -->
+                  <li class="dropdown-submenu">
+                    <a class="dropdown-item dropdown-toggle" href="#">Resumen</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio1.html" target="_blank">Ejercicio 1</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio2.html" target="_blank">Ejercicio 2</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio3.html" target="_blank">Ejercicio 3</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio4.html" target="_blank">Ejercicio 4</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio5.html" target="_blank">Ejercicio 5</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio6.html" target="_blank">Ejercicio 6</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio7.html" target="_blank">Ejercicio 7</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio8.html" target="_blank">Ejercicio 8</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio9.html" target="_blank">Ejercicio 9</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio10.html" target="_blank">Ejercicio 10</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio11.html" target="_blank">Ejercicio 11</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio12.html" target="_blank">Ejercicio 12</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Resumen/Ejercicio13.html" target="_blank">Ejercicio 13</a></li>
+                    </ul>
+                  </li>
+
+                  <!-- Avances Parte 2 -->
+                  <li class="dropdown-submenu">
+                    <a class="dropdown-item dropdown-toggle" href="#">Avances Parte 2</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Avancep2/Menu-Slide.html" target="_blank">Ejercicio 1 - Menu-Slide</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Avancep2/CommonJS.html" target="_blank">Ejercicio 2 - CommonJS</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Avancep2/ECMAScript6.html" target="_blank">Ejercicio 3 - ECMAScript6</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Avancep2/IIFE.html" target="_blank">Ejercicio 4 - IIFE</a></li>
+                      <li><a class="dropdown-item" href="../../UNIDAD 3/3.1/Avancep2/ResponsiveDesign.html" target="_blank">Ejercicio 5 - Responsive Design</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">
+                  <i class="fas fa-code"></i> Actividades en clase
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="../../UNIDAD 3/ACTIVIDADES_CLASE/Actividad1.html" target="_blank">Ejercicio 1</a></li>
+                  <li><a class="dropdown-item" href="../../UNIDAD 3/ACTIVIDADES_CLASE/Actividad2.html" target="_blank">Ejercicio 2</a></li>
+                </ul>
+                </li>
+            </ul>
+          </li>
+
+          <!-- Unidad 4 -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="unidad4" role="button" data-bs-toggle="dropdown">
+               Unidad 4
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="unidad4">
+              <!-- Contenido de la Unidad 4 aquí -->
+            </ul>
+          </li>
+          
+          <!-- Unidad 5 -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="unidad5" role="button" data-bs-toggle="dropdown">
+              Unidad 5
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="unidad5">
+              <!-- Contenido de la Unidad 5 aquí -->
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Contenido principal -->
+  <div class="container mt-4">
+    <div id="mainContent" class="content">
+      <div class="welcome-section">
+        <h1><i class="fas fa-laptop-code"></i> PROGRAMACIÓN WEB</h1>
+        <p><strong>Docente:</strong> Omar Eduardo Betanzos Martinez.</p>
+        <p><strong>Alumna:</strong> Genesis Zapata Gil.</p>
+        <p class="mt-3">En esta página web se pueden visualizar todas las actividades realizadas durante el semestre :).</p>
+        
+        <div class="temario-section mt-4">
+          <h3>Temario</h3>
+          <div class="table-responsive">
+            <table class="table table-temario">
+              <thead>
+                <tr>
+                  <th>Tema</th>
+                  <th>Subtemas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Introducción a las aplicaciones web</strong></td>
+                  <td>
+                    1.1 Evolución de las aplicaciones web.<br>
+                    1.2 Arquitectura de las aplicaciones web.<br>
+                    1.3 Tecnologías para el desarrollo de aplicaciones web.<br>
+                    1.4 Planificación de aplicaciones web.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>2. HTML, XML y CSS</strong></td>
+                  <td>
+                    2.1 Introducción.<br>
+                    2.2 Estructura global de un documento Web.<br>
+                    2.3 Elementos básicos: texto, vínculos, listas, tablas, objetos, imágenes y aplicaciones.<br>
+                    2.4 Formularios.<br>
+                    2.5 Lenguajes de presentación en documentos Web.<br>
+                    2.6 Selectores.<br>
+                    2.7 Modelo de caja.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>3. Programación del lado del cliente</strong></td>
+                  <td>
+                    3.1 Introducción al lenguaje.<br>
+                    3.2 Manejo de Frameworks.<br>
+                    3.3 Estructuras de Control.<br>
+                    3.4 Manipulación de objetos.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>4. Programación del lado del servidor</strong></td>
+                  <td>
+                    4.1 Introducción al lenguaje.<br>
+                    4.2 Estructuras de Control.<br>
+                    4.3 Tratamiento de Formularios.<br>
+                    4.4 Manejo de objetos del servidor.<br>
+                    4.5 Creación de clases.<br>
+                    4.6 Acceso a datos.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>5. Cómputo en la nube y servicios</strong></td>
+                  <td>
+                    5.1 Conceptos generales.<br>
+                    5.2 Tipos de Servicios en la nube.<br>
+                    5.3 Patrones de diseño.<br>
+                    5.4 Estándares en servicios.<br>
+                    5.5 Plataformas tecnológicas.<br>
+                    5.6 Seguridad e interoperabilidad.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Mostrar PDF en el body
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('.load-pdf');
+      if (!link) return;
+      e.preventDefault();
+
+      const src = link.dataset.src;
+      const title = link.textContent.trim();
+
+      document.getElementById('mainContent').innerHTML = `
+        <h3><i class="fas fa-file-pdf"></i> ${title}</h3>
+        <div class="mt-3">
+          <object class="iframe-pdf" data="${src}" type="application/pdf">
+            <div class="alert alert-warning">
+              <p>No se pudo mostrar el PDF. <a href="${src}" target="_blank" class="btn btn-outline-verde">Abrir en otra pestaña</a></p>
+            </div>
+          </object>
+        </div>
+        <div class="mt-3">
+          <button class="btn btn-verde" onclick="location.reload()">
+            <i class="fas fa-home"></i> Regresar al inicio
+          </button>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>

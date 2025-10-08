@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forms 4 - tres funciones</title>
+    <script>
+        function cuadrado(n) {
+            return n ** 2;
+        }
+
+        function cubo(n) {
+            return n ** 3;
+        }
+
+        function calcularPotencias() {
+            let numero = document.fdatos.entrada.value;
+            numero = parseFloat(numero);
+
+            let resultadoCuadrado = cuadrado(numero);
+            let resultadoCubo = cubo(numero);
+
+            document.writeln(`Número: ${numero}<br>`);
+            document.writeln(`Al cuadrado: ${resultadoCuadrado}<br>`);
+            document.writeln(`Al cubo: ${resultadoCubo}`);
+        }
+    </script>
+</head>
+<body>
+    <form name="fdatos">
+        Introduce un número: 
+        <input type="text" name="entrada"/>
+        <input type="button" value="Calcular" onclick="calcularPotencias()" />
+    </form>
+</body>
+</html>

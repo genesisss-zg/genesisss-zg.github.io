@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Calculadora IP Class</title>
+    <script>
+    function getClass(i) {
+        if (i >= 240) {
+            return alert("Clase E");
+        } 
+        else if (i >= 224) {
+            return alert("Clase D");
+        } 
+        else if (i >= 192) {
+            return alert("Clase C");
+        } 
+        else if (i >= 128) {
+            return alert("Clase B");
+        } 
+        else if (i >= 1) {
+            return alert("Clase A");
+        } 
+        else {
+            return alert("Número inválido para un octeto");
+        }
+    }
+
+    function getOctal() {
+        var txt = document.getElementById("octal1");
+        var o1 = parseInt(txt.value);
+
+        if (isNaN(o1) || o1 < 0 || o1 > 255) {
+            alert("Introduce un número válido entre 0 y 255");
+            return;
+        }
+
+        getClass(o1);
+    }
+    </script>
+    </head>
+    <body>
+        <h2>Calculadora Clase IP</h2>
+        <h3>Introduce el primer octeto (8 bits)</h3>
+        <input type="text" name="oc1" id="octal1">
+        <input type="button" value="Obtener Clase" onClick="getOctal()">
+    </body>
+</html>

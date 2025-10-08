@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Clase ES6</title>
+<script>
+class EntradaDatos {
+    constructor() {
+        this.nombre = "admin";
+        this.edad = 20;
+    }
+
+    introduceNombre() {
+        let valorEntrada = document.formEntrada.txtNombre.value;
+        if (this.compruebaNombre(valorEntrada))
+            this.nombre = valorEntrada;
+        else
+            this.nombre = "No válido";
+    }
+
+    compruebaNombre(valor) {
+        return !(valor == null || valor == "");
+    }
+
+    verNombre() {
+        return this.nombre;
+    }
+
+    verEdad() {
+        return this.edad;
+    }
+}
+
+function programa() {
+    let obj = new EntradaDatos();
+    obj.introduceNombre();
+    document.writeln(`El nombre es: ${obj.verNombre()} <br>`);
+    document.writeln(`La edad es: ${obj.verEdad()} <br>`);
+}
+</script>
+</head>
+<body>
+<h3>Clase EntradaDatos - ES6</h3>
+<form name="formEntrada">
+    Introduce el nombre: <input type="text" name="txtNombre" />
+    <input type="button" value="Mostrar datos" onclick="programa()" />
+</form>
+</body>
+</html>

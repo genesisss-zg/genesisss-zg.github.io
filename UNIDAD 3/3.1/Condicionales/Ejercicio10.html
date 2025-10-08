@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Validación de Edad</title>
+  <script>
+    let edad;
+    let mensaje;
+    edad = parseInt(window.prompt("Introduce tu edad:", "0"));
+
+    if (edad < 1 || edad > 120 || isNaN(edad)) {
+      mensaje = "Edad no válida. Debe estar entre 1 y 120 años.";
+    } else {
+   
+      if (edad > 18) {
+        mensaje = "Sí tiene permiso de acceso.";
+      } else {
+        mensaje = "No tiene permiso de acceso.";
+      }
+    }
+    document.write(`<h2>${mensaje}</h2>`);
+  </script>
+</head>
+<body>
+</body>
+</html>
